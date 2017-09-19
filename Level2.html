@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="P1.css">
+  <title>GAME</title>
+
+</head>
+<body>
+
+  <canvas id='canvas' style='border: 1px solid; width: 1200px; height: 600px;'>
+    
+  </canvas>
+ 
+
+  <script>
+ 
+	
+
+    // Cache a reference to the html element
+    var canvas = document.getElementById('canvas');
+	
+
+    // Set the drawing surface dimensions to match the canvas
+    canvas.width  = canvas.scrollWidth;
+    canvas.height = canvas.scrollHeight;
+
+    // Get a reference to the 2d drawing context / api
+    var ctx = canvas.getContext('2d');
+	
+	
+    var x=137;
+	var y=187;
+	var x1=287;
+	var y1=262;
+	var x3=0;
+	var y3=0;
+	var cost=-1;
+	var score1=0;
+	var counter=0;
+	var p;
+	var a;
+	var timetake1=[];
+	var xaxis1=[];
+	var yaxis1=[];
+	var s;
+	
+	var z;
+	
+	var b = 512;
+	var spdb = 75;
+	var c = 412;
+	var spdc= 0;
+	var point=0;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	var flag=0;
+	/*window.onload= function picture(){
+		var pic= new Image();
+		pic.src="Images.png";
+		pic.addEventListener("load", function(){canvas.drawImage(pic,0,0,150,150)},false);
+	}*/
+	
+	
+	
+	//window.addEventListener("load", picture, false);
+	//var a= event.clientX;
+	//var b= event.clientY;
+    // Green filled rectangle
+    //ctx.fillStyle = 'white';
+   // ctx.fillRect(50, 50, 100, 100);
+	// Red rectangle outline
+	
+	function grid(){
+	
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(100, 150, 75, 75);
+	ctx.strokeRect(175, 150, 75, 75);
+	ctx.strokeRect(250, 150, 75, 75);
+	ctx.strokeRect(100, 225, 75, 75);
+	ctx.strokeRect(175, 225, 75, 75);
+	ctx.strokeRect(250, 225, 75, 75);
+	ctx.strokeRect(100, 300, 75, 75);
+	ctx.strokeRect(175, 300, 75, 75);
+	ctx.strokeRect(250, 300, 75, 75);
+	ctx.strokeRect(100, 375, 75, 75);
+	ctx.strokeRect(175, 375, 75, 75);
+	ctx.strokeRect(250, 375, 75, 75);
+	ctx.strokeRect(325, 300, 75, 75);
+	ctx.strokeRect(400, 300, 75, 75);
+	ctx.strokeRect(475, 300, 75, 75);
+	ctx.strokeRect(325, 375, 75, 75);
+	ctx.strokeRect(400, 375, 75, 75);
+	ctx.strokeRect(475, 375, 75, 75);
+	ctx.strokeRect(325, 150, 75, 75);
+	ctx.strokeRect(400, 150, 75, 75);
+	ctx.strokeRect(475, 150, 75, 75);
+	ctx.strokeRect(325, 225, 75, 75);
+	ctx.strokeRect(400, 225, 75, 75);
+	ctx.strokeRect(475, 225, 75, 75);
+	
+	
+	
+	}
+	
+	
+	
+	grid();
+	
+	
+	/*
+	
+	ctx.fillStyle = 'blue';
+	ctx.fillRect(475, 375, 75, 75);
+	ctx.font="bold 20px Tahoma";
+    //ctx.text-align="end";
+	ctx.fillStyle = 'white';
+    ctx.fillText("GOAL",486,420);
+	*/
+	
+	//ctx.fillStyle = 'yellow';
+	//ctx.fillRect(900, 250, 100, 100);
+	//circle
+	
+	ctx.beginPath();
+    ctx.arc(137,187, 25, 0, Math.PI * 2);
+    ctx.fillStyle = 'blue';
+	ctx.fill();
+	/*
+	ctx.beginPath();
+	ctx.arc(287,187+75, 25, 0, Math.PI * 2);
+	
+    ctx.fillStyle = 'red';
+    ctx.fill();
+	*/
+	
+	ctx.font="bold 25px Tahoma";
+    //ctx.text-align="end";
+	ctx.fillStyle = 'green';
+    ctx.fillText("LEVEL 2",50,100);
+	
+	
+//	ctx.fillStyle = 'gray';
+//	ctx.fillRect(512, 412, 38, 38);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	function fun(){
+		grid();
+		
+		if(x==event.clientX && y==event.clientY){
+			s=1;
+		
+		}else{
+			s=0;
+			if((x+38)<event.clientX && event.clientY<y+38){
+				a=0;
+				if(event.clientX-(x+38)<75 && (y+38)- event.clientY<75){
+					
+					x2=x+75;
+					y2=y;
+					if(x2==x3 && y2==y3){
+						alert("You cannot move because of collision");
+						exit();
+						p=1;
+			
+					}else{
+						ctx.clearRect(x-30,y-30, 55,55);
+						ctx.beginPath();
+						ctx.arc(x=x+75,y, 25, 0, Math.PI * 2);
+						ctx.fillStyle = 'blue';
+						ctx.fill();
+			}
+			}else{
+				a=1;
+				alert("Invalid move");
+				
+			
+			}
+			}
+			
+			else if((y+38)<event.clientY && event.clientX<x+38){
+				a=0;
+				if(event.clientY-(y+38)<75 && (x+38)-event.clientX<75){
+					
+					x2=x;
+					y2=y+75;
+					if(x2==x3 && y2==y3){
+						alert("You cannot move because of collision");
+						exit();
+						p=1;
+					
+					}else{
+						ctx.clearRect(x-30,y-30, 55,55);
+						ctx.beginPath();
+						ctx.arc(x,y=y+75, 25, 0, Math.PI * 2);
+						ctx.fillStyle = 'blue';
+						ctx.fill();
+				}
+				}else{
+					a=1;
+					alert("Invalid move");
+				
+			}
+			}
+			else if((x-38)>event.clientX && event.clientY<(y+38)){
+				a=0;
+				if((x-38)-event.clientX <75 && (y+38)-event.clientY<75){
+					
+					x2=x-75;
+					y2=y;
+					if(x2==x3 && y2==y3){
+						alert("You cannot move because of collision");
+						exit();
+						p=1;
+					}else{
+						ctx.clearRect(x-30,y-30, 55,55);
+						ctx.beginPath();
+						ctx.arc(x=x-75,y, 25, 0, Math.PI * 2);
+						ctx.fillStyle = 'blue';
+						ctx.fill();	
+					}
+				}else{
+					a=1;
+					alert("Invalid move");
+				}
+			
+			}else if((y-38)>event.clientY && event.clientX<(x+38)){
+				a=0;
+				if((y-38)-event.clientY<75 && (x+38)- event.clientX<75){
+					
+					x2=x;
+					y2=y-75;
+					if(x2==x3 && y2==y3){
+						alert("You cannot move because of collision");
+						exit();
+						p=1;
+					}else{
+						ctx.clearRect(x-30,y-30, 55,55);
+						ctx.beginPath();
+						ctx.arc(x,y=y-75, 25, 0, Math.PI * 2);
+						ctx.fillStyle = 'blue';
+						ctx.fill();	
+				}
+				}else{
+					a=1;
+					alert("Invalid move");
+				
+				
+				}	
+			
+		}	else if((y+38)<event.clientY && event.clientX>x+38){
+			
+				a=1;
+				alert("Invalid move");
+		
+			}
+		
+		}
+		
+	//success
+	
+	
+	var date= new Date().getTime();
+		
+	
+	
+	
+	
+	timetake1.push(date);
+	
+	
+	xaxis1.push(x);
+	yaxis1.push(y);
+	
+	localStorage.setItem("timeL1", timetake1);
+
+	localStorage.setItem("xaxisL1", xaxis1);
+	
+	localStorage.setItem("yaxisL1", yaxis1);
+	
+	
+
+	
+	}
+	
+	
+	
+	
+	function countdown(secs){
+		
+		grid();
+		ctx.beginPath();
+		ctx.arc(x,y, 25, 0, Math.PI * 2);
+		ctx.fillStyle = 'blue';
+		ctx.fill();
+		
+		if(secs<1){
+			
+		}else{
+			ctx.fillStyle = 'gray';
+			ctx.fillRect(550, 450, 25, 25);
+			
+			var w = Math.floor((Math.random() * 20) + 1);
+			if(w%2==0){
+	
+	
+	
+	
+				
+	
+	
+	
+	
+	
+	
+	
+			function bubble1(){
+	
+			
+		
+	
+			z=z+1;
+			var b = 512;
+			var spdb = 30;
+			var c = 412;
+			var spdc= 0;
+			
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+		
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c-= spdc;
+					if(b<x+25 && b>x-25 && c==y){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						b=50;
+						point=point+1;
+						
+					//	clearRect(700,600,600,400);
+					//	ctx.fillText("Your Score : "+ point,800,700);
+						
+						
+						
+						
+					}else if(b>100){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			setInterval(update,1000);
+			
+		
+			
+		
+			
+		
+		
+			}
+			
+
+			
+			bubble1();
+			}else if(w==5|| w==8 || w==2 || w==1 || w==9){
+			
+			function bubble3(){
+		
+			z=z+1;
+			var b = 512;
+			var spdb = 20;
+			var c = 412;
+			var spdc= 20;
+		
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+			
+			
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c-= spdc;
+					if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						c=50;
+						b=50;
+						point=point+1;
+					}else if(c>150 && b>100){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			setInterval(update,1000);
+		
+			
+		
+		
+			}
+			
+			
+			
+			
+			bubble3()
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==16 || w==10 || w==18 ){
+			
+				function bubble4(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 10;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(
+				 	b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble4();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==20 || w==7 || w==19 ){
+			
+				function bubble5(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 20;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+							clearRect(580,280,200,200);
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble5();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==12 || w==11 || w==17 ){
+			
+				function bubble6(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 15;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble6();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}
+			
+			
+			else if(w%2==1){
+			
+			function bubble2(){
+		
+			z=z+1;
+			var b = 512;
+			var spdb = 0;
+			var c = 412;
+			var spdc= 30;
+		
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+			
+			
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c-= spdc;
+					if(c<y+25 && c>y-25 && b==x){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						c=50;
+						point=point+1;
+					}else if(c>150){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			setInterval(update,1000);
+		
+			
+		
+		
+			}
+			
+			
+			
+			
+			bubble2()
+			}
+			
+			
+			secs--;
+			
+		}
+		
+		
+	//	var myvar1= setTimeout('countdown('+secs+')',1000);
+		
+		
+		ctx.clearRect(580,280,300,200);
+		ctx.fillStyle = 'black';
+		ctx.fillText("Your Score : "+ point,600,300);
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	window.addEventListener("load", countdown(20), false );
+	
+	
+	
+	
+	
+	
+	
+	
+	////////////////////////////// 2ND EMITTER
+	
+	
+	
+	
+	
+
+	function countdownt(secs){
+		
+		grid();
+		
+		if(secs<1){
+			
+		}else{
+			ctx.fillStyle = 'gray';
+			ctx.fillRect(512+38, 412-(75*3+65), 25, 25);
+			
+			var w = Math.floor((Math.random() * 20) + 1);
+			if(w%2==0){
+	
+	
+	
+	
+				
+	
+	
+	
+	
+	
+	
+	
+			function bubble1(){
+	
+			
+		
+	
+			z=z+1;
+			var b = 512;
+			var spdb = 30;
+			var c = 412-(75*3);
+			var spdc= 0;
+			
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+		
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c-= spdc;
+					if(b<x+25 && b>x-25 && c==y){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						b=50;
+						point=point+1;
+						
+					//	clearRect(700,600,600,400);
+					//	ctx.fillText("Your Score : "+ point,800,700);
+						
+						
+						
+						
+					}else if(b>100){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			setInterval(update,1000);
+			
+		
+			
+		
+			
+		
+		
+			}
+			
+
+			
+			bubble1();
+			}else if(w==5|| w==8 || w==2 || w==1 || w==9){
+			
+			function bubble3(){
+		
+			z=z+1;
+			var b = 512;
+			var spdb = 20;
+			var c = 412-(75*3);
+			var spdc= 20;
+		
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+			
+			
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c+= spdc;
+					if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						c=50;
+						b=50;
+						point=point+1;
+					}else if(c<440 && b>100){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			setInterval(update,1000);
+		
+			
+		
+		
+			}
+			
+			
+			
+			
+			bubble3()
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==16 || w==10 || w==18 ){
+			
+				function bubble4(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 10;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(
+				 	b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble4();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==20 || w==7 || w==19 ){
+			
+				function bubble5(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 20;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+							clearRect(580,280,200,200);
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble5();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}else if(w==12 || w==11 || w==17 ){
+			
+				function bubble6(){
+		
+				z=z+1;
+				var b = 512;
+				var spdb = 15;
+				var c = 412;
+				var spdc= 30;
+			
+				ctx.beginPath();
+				ctx.arc(b,c, 10, 0, Math.PI * 2);
+				
+				ctx.fillStyle = 'gray';
+				ctx.fill();
+				
+				
+				
+				function update(){
+					grid();
+					ctx.clearRect(b-10,c-10, 20,20);
+					
+					b-= spdb;
+					c-= spdc;
+						if(b<x+25 && b>x-25 && c<y+25 && c>y-25){
+							ctx.beginPath();
+							ctx.arc(x,y, 25, 0, Math.PI * 2);
+				
+							ctx.fillStyle = 'green';
+							ctx.fill();
+							c=50;
+							point=point+1;
+						}else if(c>150){
+					
+					
+							
+							ctx.beginPath();
+							ctx.arc(b,c, 10, 0, Math.PI * 2);
+						
+							ctx.fillStyle = 'gray';
+							ctx.fill();
+							
+							}
+					
+					
+					
+				
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			
+				setInterval(update,1000);
+			
+				
+			
+			
+				}
+			
+			
+			
+				bubble6();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}
+			
+			
+			else if(w%2==1){
+			
+			function bubble2(){
+		
+			z=z+1;
+			var b = 512;
+			var spdb = 0;
+			var c = 412;
+			var spdc= 30;
+		
+			ctx.beginPath();
+			ctx.arc(b,c, 10, 0, Math.PI * 2);
+			
+			ctx.fillStyle = 'gray';
+			ctx.fill();
+			
+			
+			
+			function update(){
+				grid();
+				ctx.clearRect(b-10,c-10, 20,20);
+				
+				b-= spdb;
+				c-= spdc;
+					if(c<y+25 && c>y-25 && b==x){
+						ctx.beginPath();
+						ctx.arc(x,y, 25, 0, Math.PI * 2);
+			
+						ctx.fillStyle = 'green';
+						ctx.fill();
+						c=50;
+						point=point+1;
+					}else if(c>150){
+				
+				
+						
+						ctx.beginPath();
+						ctx.arc(b,c, 10, 0, Math.PI * 2);
+					
+						ctx.fillStyle = 'gray';
+						ctx.fill();
+						
+						}
+				
+				
+				
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			setInterval(update,1000);
+		
+			
+		
+		
+			}
+			
+			
+			
+			
+			bubble2()
+			}
+			
+			
+			
+			
+		}
+		
+		secs--;
+		var myvar= setTimeout('countdownt('+secs+')',1000);
+		
+		
+		ctx.clearRect(580,280,300,200);
+		ctx.fillStyle = 'black';
+		ctx.fillText("Your Score : "+ point,600,300);
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+		
+	
+	
+	
+	window.addEventListener("load", countdownt(20), false );
+
+	
+		
+		
+		
+		
+
+	
+	
+	
+	
+	
+	
+	
+	//timer
+	function countdownn(secs){
+	
+		ctx.clearRect(790,470,600,100);
+	//	ctx.clearRect(900,200,600,100);
+		ctx.font="bold 20px Tahoma";
+		ctx.fillStyle = 'black';
+		ctx.fillText("Time remaining : "+secs+" seconds", 800,500);
+		
+		if(x==123123 && y==41254){
+			//clearRect(300,450,600,400);
+			//ctx.fillText("Your Score : "+ score1,400,500);
+			clearTimeout(myvar1);
+		//	ctx.fillText (" Your time is up!!",450,50);
+		//	success();
+		//	exit();
+			window.location.replace("Lvl1_success.html");
+		}
+		
+		secs--;
+		var myvar1= setTimeout('countdownn('+secs+')',1000);
+		
+	}
+	window.addEventListener("load", countdownn(50), false );
+	
+	
+	
+	
+	function countdown1(secs){
+	
+		ctx.clearRect(790,470,600,100);
+	//	ctx.clearRect(900,200,600,100);
+		ctx.font="bold 20px Tahoma";
+		ctx.fillStyle = 'black';
+		ctx.fillText("Time remaining : "+secs+" seconds", 800,500);
+		
+		if(secs<1){
+			//clearRect(300,450,600,400);
+			//ctx.fillText("Your Score : "+ score1,400,500);
+			clearTimeout(myvar);
+		//	ctx.fillText (" Your time is up!!",450,50);
+		//	next();
+		//	exit();
+			window.location.replace("Lvl1_timeout.html");
+		}
+		
+		secs--;
+		var myvar= setTimeout('countdown1('+secs+')',1000);
+		
+	}
+	window.addEventListener("load", countdown1(50), false );
+	
+	
+	
+	
+	
+	//image
+	
+	function dod(){
+   
+	var pic=new Image();
+	pic.src= "Arndit.png"
+	
+	
+	pic.addEventListener("load", function(){ctx.drawImage(pic,1075,0,100,100)},false);
+	
+	}
+	
+	window.addEventListener("load", dod, false );
+	
+	
+	
+	
+  </script>
+  
+  
+  <input type="button"  style="position:absolute;top:165px;left:115px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  /> 
+  <input type="button"  style="position:absolute;top:165px;left:190px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:165px;left:265px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:240px;left:115px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:240px;left:190px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:240px;left:265px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:115px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:190px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:265px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:115px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:190px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:265px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:340px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:415px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:315px;left:490px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:340px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:415px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  <input type="button"  style="position:absolute;top:390px;left:490px;padding: 20px 30px;background-color: transparent;border-color: transparent" onclick="fun()" /> 
+  
+  
+  <input type="button"  style="position:absolute;top:165px;left:340px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+  <input type="button"  style="position:absolute;top:165px;left:415px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+<input type="button"  style="position:absolute;top:165px;left:490px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+  <input type="button"  style="position:absolute;top:240px;left:340px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+  <input type="button"  style="position:absolute;top:240px;left:415px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+	<input type="button"  style="position:absolute;top:240px;left:490px;padding: 20px 30px;background-color: transparent;border-color: transparent"  onclick="fun()"  />
+  
+</body>
+</html>
